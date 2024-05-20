@@ -72,22 +72,7 @@ cat <<EOF > /etc/hosts
 127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}
 EOF
 
-echo "installing compressing stuff"
-pacman -S zip unzip --noconfirm --needed
-
-echo "installing remote stuff"
-pacman -S bluez bluez-utils openssl openssh ufw rsync git --noconfirm --needed
-
-echo "installing bluetooth stuff"
-pacman -S bluez bluez-utils --noconfirm --needed
-
-echo "installing display stuff"
-pacman -S xorg --noconfirm --needed
-
-echo "installing audio stuff"
-pacman -S pulseaudio --noconfirm --needed
-
-systemctl enable NetworkManager bluetooth
+systemctl enable NetworkManager
 
 echo "finished. type reboot."
 
