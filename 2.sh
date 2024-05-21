@@ -24,9 +24,9 @@ echo "installing audio stuff"
 pacman -S pulseaudio --noconfirm --needed
 
 echo "installing browsers"
-sudo pacman -S firefox discord chromium xdotool xclip tigervnc man-db
+sudo pacman -S firefox chromium
 
-echo "installing browsers"
+echo "installing discord"
 sudo pacman -S discord
 
 echo "installing xdotool and xclip"
