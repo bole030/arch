@@ -11,7 +11,7 @@ read ROOT
 
 echo -e "\n create and mount partitions \n"
 
-mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
+mkfs.fat -F32 "${EFI}"
 mkswap "${SWAP}"
 swapon "${SWAP}"
 mkfs.ext4 "${ROOT}"
