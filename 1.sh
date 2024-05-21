@@ -12,9 +12,9 @@ read ROOT
 echo -e "\n create and mount partitions \n"
 
 mkfs.fat -F32 "${EFI}"
+mkfs.ext4 "${ROOT}"
 mkswap "${SWAP}"
 swapon "${SWAP}"
-mkfs.ext4 "${ROOT}"
 
 # mount target
 mount -t ext4 "${ROOT}" /mnt
