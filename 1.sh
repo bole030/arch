@@ -40,6 +40,7 @@ echo "Please enter your password"
 read PASSWORD 
 
 cat <<REALEND > /mnt/next.sh
+passwd
 useradd -m bole
 usermod -aG wheel,storage,power,audio $USER
 echo bole:$PASSWORD | chpasswd
