@@ -34,16 +34,6 @@ pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "-- installing bootloader  --"
-bootctl install --path /mnt/boot
-echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=${ROOT} rw
-EOF
-
 echo "Please enter your hostname"
 read HOSTNAME 
 
