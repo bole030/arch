@@ -43,3 +43,5 @@ sudo pacman -S tigervnc
 
 echo "installing gnome-kering-daemon"
 sudo pacman -S gnome-kering-daemon
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
