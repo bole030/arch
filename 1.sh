@@ -14,12 +14,12 @@ echo -e "\n create and mount partitions \n"
 mkfs.fat -F32 "${EFI}"
 mkfs.ext4 "${ROOT}"
 mkswap "${SWAP}"
-swapon "${SWAP}"
 
 # mount target
 mount -t ext4 "${ROOT}" /mnt
 mkdir /mnt/boot
 mount "${EFI}" /mnt/boot/
+swapon "${SWAP}"
 
 echo "installing arch base"
 pacstrap /mnt base base-devel --noconfirm --needed
