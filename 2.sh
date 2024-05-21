@@ -44,4 +44,8 @@ sudo pacman -S tigervnc
 echo "installing gnome-kering-daemon"
 sudo pacman -S gnome-kering-daemon
 
+echo "installing nvm for node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+echo "installing python"
+sudo pacman -S python
