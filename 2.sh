@@ -6,7 +6,7 @@ echo "installing time sync"
 sudo pacman -S ntp --noconfirm --needed
 
 echo "installing bluetooth stuff"
-sudo pacman -S bluez bluez-utils --noconfirm --needed
+sudo pacman -S bluez bluez-utils blueman --noconfirm --needed
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 
