@@ -36,12 +36,16 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "Please enter your hostname"
 read HOSTNAME 
 
+echo "Please enter your username"
+read USER 
+
 echo "Please enter your password"
 read PASSWORD 
 
 cat <<REALEND > /mnt/next.sh
+echo "Please enter your root password"
 passwd
-useradd -m bole
+useradd -m $USER
 usermod -aG wheel,storage,power,audio $USER
 echo bole:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
