@@ -28,7 +28,6 @@ echo "installing linux"
 pacstrap /mnt linux linux-firmware --noconfirm --needed
 
 echo "installing basic tools"
-
 pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 
 # fstab
@@ -64,6 +63,9 @@ cat <<EOF > /etc/hosts
 EOF
 
 systemctl enable NetworkManager
+
+echo "-- installing bootloader  --"
+pacman -S grub efibootmgr dosfstools mtools
 
 echo "finished. type reboot."
 
