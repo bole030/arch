@@ -21,7 +21,7 @@ sudo ufw allow 22
 sudo ufw enable
 
 echo "installing display stuff"
-sudo pacman -S xorg --noconfirm --needed
+sudo pacman -S xorg feh figlet --noconfirm --needed
 
 echo "installing audio stuff"
 sudo pacman -S pulseaudio --noconfirm --needed
@@ -40,3 +40,6 @@ sudo pacman -S man-db
 
 echo "installing vnc"
 sudo pacman -S tigervnc
+
+echo "installing gnome-kering-daemon"
+sudo pacman -S gnome-kering-daemon
