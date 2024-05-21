@@ -29,7 +29,7 @@ pacstrap /mnt linux linux-firmware --noconfirm --needed
 
 echo "installing basic tools"
 
-pacstrap /mnt zsh networkmanager vim sof-firmware grub efibootmgr --noconfirm --needed
+pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
