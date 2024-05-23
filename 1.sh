@@ -7,7 +7,19 @@ echo "Please enter SWAP paritition: (example /dev/sda2)"
 read SWAP
 
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
-read ROOT 
+read ROOT
+
+echo "Please enter your hostname"
+read HOSTNAME
+
+echo "Please enter your root password"
+read ROOTPASSWORD
+
+echo "Please enter your username"
+read USER
+
+echo "Please enter your password"
+read PASSWORD
 
 echo -e "\n create and mount partitions \n"
 
@@ -33,18 +45,9 @@ pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "Please enter your hostname"
-read HOSTNAME 
-
-echo "Please enter your username"
-read USER 
-
-echo "Please enter your password"
-read PASSWORD 
-
 cat <<REALEND > /mnt/next.sh
 echo "Please enter your root password"
-passwd
+echo root:$ROOTPASSWORD | chpasswd
 useradd -m $USER
 usermod -aG wheel,storage,power,audio $USER
 echo bole:$PASSWORD | chpasswd
