@@ -9,12 +9,13 @@ echo "installing bluetooth stuff"
 sudo pacman -S bluez bluez-utils blueman --noconfirm --needed
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
+sudo sed -i 's/^#FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
+sudo sed -i 's/^# FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
 
 echo "installing remote stuff (ssh, ufw, rsync, git)"
 sudo pacman -S openssl openssh ufw rsync git --noconfirm --needed
 sudo systemctl enable sshd
 sudo systemctl start sshd
-
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow 22
