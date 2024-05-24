@@ -94,6 +94,10 @@ echo "installing bluetooth stuff"
 sudo pacman -S bluez bluez-utils blueman --noconfirm --needed
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
+sudo sed -i 's/^#AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
+sudo sed -i 's/^# AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
+sudo sed -i 's/^#AutoEnable = true/AutoEnable=true/' /etc/bluetooth/main.conf
+sudo sed -i 's/^# AutoEnable = true/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo sed -i 's/^#FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
 sudo sed -i 's/^# FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
 
