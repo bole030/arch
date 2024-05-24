@@ -82,7 +82,7 @@ REALEND
 
 arch-chroot /mnt sh next.sh
 
-cat <<SECOND > /mnt/home/$USERNAME/2.sh
+cat <<SECOND > /mnt/home/$USER/2.sh
 
 echo "installing compressing stuff"
 sudo pacman -S zip unzip --noconfirm --needed
