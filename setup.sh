@@ -78,11 +78,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager
 
-REALEND
-
-arch-chroot /mnt sh next.sh
-
-cat <<SECOND > /mnt/home/$USER/2.sh
+su $USER
 
 echo "installing compressing stuff"
 sudo pacman -S zip unzip --noconfirm --needed
@@ -140,11 +136,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 echo "installing python"
 sudo pacman -S python
 
-SECOND
-
 sudo pacman -S nvidia picom fuse3 os-prober
 sudo sed -i 's/^GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/' /etc/default/grub
 sudo sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 sudo sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+
+REALEND
+
+arch-chroot /mnt sh next.sh
 
 umount -lR /mnt
