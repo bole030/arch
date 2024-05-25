@@ -132,7 +132,7 @@ echo "installing vnc"
 sudo pacman -S tigervnc
 
 echo "installing gnome-kering-daemon"
-sudo pacman -S gnome-kering
+sudo pacman -S gnome-keyring
 
 echo "installing nvm for node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -141,5 +141,10 @@ echo "installing python"
 sudo pacman -S python
 
 SECOND
+
+sudo pacman -S nvidia picom fuse3 os-prober
+sudo sed -i 's/^GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/' /etc/default/grub
+sudo sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+sudo sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 
 umount -lR /mnt
