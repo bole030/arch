@@ -22,17 +22,32 @@ read ROOTINDEX
 ROOT="/dev/${DISKNAME}p${ROOTINDEX}"
 echo $ROOT
 
-echo "Please enter your hostname"
+echo "enter hostname"
 read HOSTNAME
 
-echo "Please enter your root password"
+echo "enter root password"
 read ROOTPASSWORD
 
-echo "Please enter your username"
+echo "enter username"
 read USERNAME
 
-echo "Please enter your password"
+echo "enter password"
 read PASSWORD
+
+echo "enter 1 to get DISCORD"
+read DISCORD
+
+echo "enter 1 to get PYTHON"
+read PYTHON
+
+echo "enter 1 to get NVM"
+read NVM
+
+echo "enter 1 to get NVIDIA and PICOM"
+read NVIDIAPICOM
+
+echo "enter 1 to setup DUALBOOT"
+read DUALBOOT
 
 echo -e "\n create and mount partitions \n"
 
@@ -59,7 +74,6 @@ pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cat <<REALEND > /mnt/next.sh
-echo "Please enter your root password"
 echo root:$ROOTPASSWORD | chpasswd
 useradd -m $USERNAME
 usermod -aG wheel,storage,power,audio $USERNAME
@@ -83,7 +97,7 @@ cat <<EOF > /etc/hosts
 127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}
 EOF
 
-echo "-- installing bootloader  --"
+echo "installing bootloader"
 pacman -S grub efibootmgr dosfstools mtools
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
@@ -122,40 +136,52 @@ sudo ufw default allow outgoing
 sudo ufw allow 22
 sudo ufw enable
 
+echo "installing manuals"
+sudo pacman -S man-db
+
 echo "installing display stuff"
 sudo pacman -S xorg feh figlet --noconfirm --needed
 
 echo "installing audio stuff"
 sudo pacman -S pulseaudio --noconfirm --needed
 
+echo "installing gnome-kering-daemon"
+sudo pacman -S gnome-keyring
+
 echo "installing browsers"
 sudo pacman -S firefox chromium
-
-echo "installing discord"
-sudo pacman -S discord
 
 echo "installing xdotool and xclip"
 sudo pacman -S xdotool xclip
 
-echo "installing manuals"
-sudo pacman -S man-db
-
 echo "installing vnc"
 sudo pacman -S tigervnc
 
-echo "installing gnome-kering-daemon"
-sudo pacman -S gnome-keyring
+if [[ $DISCORD == "1" ]]; then 
+echo "installing discord"
+sudo pacman -S discord
+fi
 
-echo "installing nvm for node"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
+if [[ $PYTHON == "1" ]]; then 
 echo "installing python"
 sudo pacman -S python
+fi
 
-sudo pacman -S nvidia picom fuse3 os-prober
+if [[ $NVM == "1" ]]; then 
+echo "installing nvm for node"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+fi
+
+if [[ $NVIDIAPICOM == "1" ]]; then 
+sudo pacman -S nvidia picom
+fi
+
+if [[ $DUALBOOT == "1" ]]; then 
+sudo pacman -S fuse3 os-prober
 sudo sed -i 's/^GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/' /etc/default/grub
 sudo sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 sudo sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+fi
 
 REALEND
 
