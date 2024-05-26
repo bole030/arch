@@ -1,13 +1,26 @@
 #!/usr/bin/env bash
 
-echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
-read EFI
+#cfdisk
 
-echo "Please enter SWAP paritition: (example /dev/sda2)"
-read SWAP
+lsblk
 
-echo "Please enter Root(/) paritition: (example /dev/sda3)"
-read ROOT
+echo "enter diskname"
+read DISKNAME
+
+echo "enter efi partition index"
+read EFIINDEX
+EFI="/dev/${DISKNAME}p${EFIINDEX}"
+echo $EFI
+
+echo "enter swap partition index"
+read SWAPINDEX
+SWAP="/dev/${DISKNAME}p${SWAPINDEX}"
+echo $SWAP
+
+echo "enter root partition index"
+read ROOTINDEX
+ROOT="/dev/${DISKNAME}p${ROOTINDEX}"
+echo $ROOT
 
 echo "Please enter your hostname"
 read HOSTNAME
@@ -16,7 +29,7 @@ echo "Please enter your root password"
 read ROOTPASSWORD
 
 echo "Please enter your username"
-read USER
+read USERNAME
 
 echo "Please enter your password"
 read PASSWORD
@@ -48,8 +61,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat <<REALEND > /mnt/next.sh
 echo "Please enter your root password"
 echo root:$ROOTPASSWORD | chpasswd
-useradd -m $USER
-usermod -aG wheel,storage,power,audio $USER
+useradd -m $USERNAME
+usermod -aG wheel,storage,power,audio $USERNAME
 echo bole:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 sed -i 's/^#%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
@@ -81,7 +94,7 @@ systemctl enable NetworkManager
 echo "auth       optional     pam_gnome_keyring.so" >> /etc/pam.d/login
 echo "session    optional     pam_gnome_keyring.so auto_start" >> /etc/pam.d/login
 
-su $USER
+su $USERNAME
 
 echo "installing compressing stuff"
 sudo pacman -S zip unzip --noconfirm --needed
