@@ -162,8 +162,8 @@ sudo sed -i 's/^#AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo sed -i 's/^# AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo sed -i 's/^#AutoEnable = true/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo sed -i 's/^# AutoEnable = true/AutoEnable=true/' /etc/bluetooth/main.conf
-sudo sed -i 's/^#FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
-sudo sed -i 's/^# FastConnectable = false/FastConnectable = false/' /etc/bluetooth/main.conf
+sudo sed -i 's/^#FastConnectable = false/FastConnectable = true/' /etc/bluetooth/main.conf
+sudo sed -i 's/^# FastConnectable = false/FastConnectable = true/' /etc/bluetooth/main.conf
 
 echo "installing remote stuff (ssh, ufw, rsync, git)"
 sudo pacman -S openssl openssh ufw rsync git --noconfirm --needed
