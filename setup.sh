@@ -2,7 +2,7 @@
 
 lsblk
 
-echo "enter 1 to setup DUALBOOT"
+echo "enter 1 to setup DUALBOOT or 0"
 read DUALBOOT
 
 echo "enter diskname"
@@ -56,31 +56,31 @@ read USERNAME
 echo "enter password"
 read PASSWORD
 
-echo "enter 1 to get DISCORD"
+echo "enter 1 to get DISCORD or 0"
 read DISCORD
 
-echo "enter 1 to get FIREFOX"
+echo "enter 1 to get FIREFOX or 0"
 read FIREFOX
 
-echo "enter 1 to get CHROMIUM"
+echo "enter 1 to get CHROMIUM or 0"
 read CHROMIUM
 
-echo "enter 1 to get VNC"
+echo "enter 1 to get VNC or 0"
 read VNC
 
-echo "enter 1 to get PYTHON"
+echo "enter 1 to get PYTHON or 0"
 read PYTHON
 
-echo "enter 1 to get NVM"
+echo "enter 1 to get NVM or 0"
 read NVM
 
-echo "enter 1 to get NVIDIA drivers (only if a nvidia grafic card is mounted)"
+echo "enter 1 to get NVIDIA drivers (only if a nvidia grafic card is mounted) or 0"
 read NVIDIA
 
-echo "enter 1 to get PICOM"
+echo "enter 1 to get PICOM or 0"
 read PICOM
 
-echo "enter 1 to get ZEROTIER"
+echo "enter 1 to get ZEROTIER or 0"
 read ZEROTIER
 
 echo -e "\n create and mount partitions \n"
