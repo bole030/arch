@@ -10,9 +10,16 @@ read DUALBOOT
 echo "enter diskname"
 read DISKNAME
 
+if [[ $DUALBOOT == "1" ]]; 
+then
+EFIINDEX="5"
+SWAPINDEX="6"
+ROOTINDEX="7"
+else
 EFIINDEX="1"
 SWAPINDEX="2"
 ROOTINDEX="3"
+fi
 
 echo "enter efi partition index"
 #read EFIINDEX
