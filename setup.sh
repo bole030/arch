@@ -12,9 +12,18 @@ read DISKNAME
 
 if [[ $DUALBOOT == "1" ]]; 
 then
-EFIINDEX="5"
-SWAPINDEX="6"
-ROOTINDEX="7"
+echo "enter index of empty partition"
+read EMPTYPARTITIONINDEX
+(
+echo "n"; echo ${EMPTYPARTITIONINDEX}; echo ""; echo "+1G";
+echo "n"; echo $((EMPTYPARTITIONINDEX+1)); echo ""; echo "+8G";
+echo "n"; echo $((EMPTYPARTITIONINDEX+2)); echo ""; echo "";
+echo "w";
+) | fdisk /dev/${DISKNAME}
+
+EFIINDEX=${EMPTYPARTITIONINDEX}
+SWAPINDEX=$((EMPTYPARTITIONINDEX+1))
+ROOTINDEX=$((EMPTYPARTITIONINDEX+2))
 else
 (echo "g";
 echo "n"; echo "1"; echo ""; echo "+1G";
