@@ -175,7 +175,7 @@ sudo ufw allow 22
 sudo ufw enable
 
 echo "installing manuals"
-sudo pacman -S man-db
+sudo pacman -S man-db --noconfirm --needed
 
 echo "installing display stuff"
 sudo pacman -S xorg feh figlet --noconfirm --needed
@@ -184,34 +184,34 @@ echo "installing audio stuff"
 sudo pacman -S pulseaudio --noconfirm --needed
 
 echo "installing gnome-kering-daemon"
-sudo pacman -S gnome-keyring
+sudo pacman -S gnome-keyring --noconfirm --needed
 
 echo "installing xdotool and xclip"
-sudo pacman -S xdotool xclip
+sudo pacman -S xdotool xclip --noconfirm --needed
+
+if [[ $DISCORD == "1" ]]; then 
+echo "installing discord"
+sudo pacman -S discord --noconfirm --needed
+fi
 
 if [[ $FIREFOX == "1" ]]; then
 echo "installing firefox"
-sudo pacman -S firefox
+sudo pacman -S firefox --noconfirm --needed
 fi
 
 if [[ $CHROMIUM == "1" ]]; then
 echo "installing chromium"
-sudo pacman -S chromium
+sudo pacman -S chromium --noconfirm --needed
 fi
 
 if [[ $VNC == "1" ]]; then
 echo "installing vnc"
-sudo pacman -S tigervnc
-fi
-
-if [[ $DISCORD == "1" ]]; then 
-echo "installing discord"
-sudo pacman -S discord
+sudo pacman -S tigervnc --noconfirm --needed
 fi
 
 if [[ $PYTHON == "1" ]]; then 
 echo "installing python"
-sudo pacman -S python
+sudo pacman -S python --noconfirm --needed
 fi
 
 if [[ $NVM == "1" ]]; then 
@@ -220,19 +220,19 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
 
 if [[ $NVIDIA == "1" ]]; then 
-sudo pacman -S nvidia
+sudo pacman -S nvidia --noconfirm --needed
 fi
 
 if [[ $PICOM == "1" ]]; then 
-sudo pacman -S picom
+sudo pacman -S picom --noconfirm --needed
 fi
 
 if [[ $ZEROTIER == "1" ]]; then 
-sudo pacman -S zerotier-one
+sudo pacman -S zerotier-one --noconfirm --needed
 fi
 
 if [[ $DUALBOOT == "1" ]]; then 
-sudo pacman -S fuse3 os-prober
+sudo pacman -S fuse3 os-prober --noconfirm --needed
 sudo sed -i 's/^GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/' /etc/default/grub
 sudo sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 sudo sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
