@@ -92,7 +92,7 @@ pacstrap /mnt zsh networkmanager vim sof-firmware --noconfirm --needed
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cat <<REALEND > /mnt/next.sh
+cat <<ASROOT > /mnt/1.sh
 echo root:$ROOTPASSWORD | chpasswd
 useradd -m $USERNAME
 usermod -aG wheel,storage,power,audio $USERNAME
@@ -127,7 +127,9 @@ systemctl enable NetworkManager
 echo "auth       optional     pam_gnome_keyring.so" >> /etc/pam.d/login
 echo "session    optional     pam_gnome_keyring.so auto_start" >> /etc/pam.d/login
 
-su $USERNAME
+ASROOT
+
+cat <<ASUSER > /mnt/2.sh
 
 echo "installing compressing stuff"
 sudo pacman -S zip unzip --noconfirm --needed
@@ -202,7 +204,7 @@ sudo sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /et
 sudo sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 fi
 
-REALEND
+ASUSER
 
 arch-chroot /mnt sh next.sh
 
