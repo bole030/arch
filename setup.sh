@@ -65,8 +65,11 @@ read PYTHON
 echo "enter 1 to get NVM"
 read NVM
 
-echo "enter 1 to get NVIDIA and PICOM"
-read NVIDIAPICOM
+echo "enter 1 to get NVIDIA drivers (only if a nvidia grafic card is mounted)"
+read NVIDIA
+
+echo "enter 1 to get PICOM"
+read PICOM
 
 echo -e "\n create and mount partitions \n"
 
@@ -195,8 +198,12 @@ echo "installing nvm for node"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
 
-if [[ $NVIDIAPICOM == "1" ]]; then 
-sudo pacman -S nvidia picom
+if [[ $NVIDIA == "1" ]]; then 
+sudo pacman -S nvidia
+fi
+
+if [[ $PICOM == "1" ]]; then 
+sudo pacman -S picom
 fi
 
 if [[ $DUALBOOT == "1" ]]; then 
