@@ -16,22 +16,28 @@ EFIINDEX="5"
 SWAPINDEX="6"
 ROOTINDEX="7"
 else
+(echo "g";
+echo "n"; echo "1"; echo ""; echo "+1G";
+echo "n"; echo "2"; echo ""; echo "+8G";
+echo "n"; echo "3"; echo ""; echo "";
+echo "w";
+) | fdisk /dev/${DISKNAME}
 EFIINDEX="1"
 SWAPINDEX="2"
 ROOTINDEX="3"
 fi
 
-echo "enter efi partition index"
+echo "efi partition index"
 #read EFIINDEX
 EFI="/dev/${DISKNAME}p${EFIINDEX}"
 echo $EFI
 
-echo "enter swap partition index"
+echo "swap partition index"
 #read SWAPINDEX
 SWAP="/dev/${DISKNAME}p${SWAPINDEX}"
 echo $SWAP
 
-echo "enter root partition index"
+echo "root partition index"
 #read ROOTINDEX
 ROOT="/dev/${DISKNAME}p${ROOTINDEX}"
 echo $ROOT
