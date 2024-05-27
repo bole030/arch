@@ -4,6 +4,9 @@
 
 lsblk
 
+echo "enter 1 to setup DUALBOOT"
+read DUALBOOT
+
 echo "enter diskname"
 read DISKNAME
 
@@ -45,9 +48,6 @@ read NVM
 
 echo "enter 1 to get NVIDIA and PICOM"
 read NVIDIAPICOM
-
-echo "enter 1 to setup DUALBOOT"
-read DUALBOOT
 
 echo -e "\n create and mount partitions \n"
 
