@@ -94,8 +94,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 cat <<ASROOT > /mnt/1.sh
 echo root:$ROOTPASSWORD | chpasswd
-useradd -m $USERNAME
-usermod -aG wheel,storage,power,audio $USERNAME
+useradd -m -G wheel,storage,power,audio -s /bin/zsh $USERNAME
+#usermod -aG wheel,storage,power,audio $USERNAME
 echo bole:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 sed -i 's/^#%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
