@@ -117,7 +117,7 @@ cat <<EOF > /etc/hosts
 EOF
 
 echo "installing bootloader"
-pacman -S grub efibootmgr dosfstools mtools
+pacman -S grub efibootmgr dosfstools mtools --noconfirm --needed
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -128,6 +128,8 @@ echo "auth       optional     pam_gnome_keyring.so" >> /etc/pam.d/login
 echo "session    optional     pam_gnome_keyring.so auto_start" >> /etc/pam.d/login
 
 ASROOT
+
+arch-chroot /mnt sh 1.sh
 
 cat <<ASUSER > /mnt/2.sh
 
@@ -206,6 +208,9 @@ fi
 
 ASUSER
 
-arch-chroot /mnt sh next.sh
+arch-chroot -u $USERNAME /mnt sh 2.sh
+
+rm /mnt/1.sh
+rm /mnt/2.sh
 
 umount -lR /mnt
