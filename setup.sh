@@ -10,18 +10,22 @@ read DUALBOOT
 echo "enter diskname"
 read DISKNAME
 
+EFIINDEX="1"
+SWAPINDEX="2"
+ROOTINDEX="3"
+
 echo "enter efi partition index"
-read EFIINDEX
+#read EFIINDEX
 EFI="/dev/${DISKNAME}p${EFIINDEX}"
 echo $EFI
 
 echo "enter swap partition index"
-read SWAPINDEX
+#read SWAPINDEX
 SWAP="/dev/${DISKNAME}p${SWAPINDEX}"
 echo $SWAP
 
 echo "enter root partition index"
-read ROOTINDEX
+#read ROOTINDEX
 ROOT="/dev/${DISKNAME}p${ROOTINDEX}"
 echo $ROOT
 
