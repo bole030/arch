@@ -59,6 +59,15 @@ read PASSWORD
 echo "enter 1 to get DISCORD"
 read DISCORD
 
+echo "enter 1 to get FIREFOX"
+read FIREFOX
+
+echo "enter 1 to get CHROMIUM"
+read CHROMIUM
+
+echo "enter 1 to get VNC"
+read VNC
+
 echo "enter 1 to get PYTHON"
 read PYTHON
 
@@ -70,6 +79,9 @@ read NVIDIA
 
 echo "enter 1 to get PICOM"
 read PICOM
+
+echo "enter 1 to get ZEROTIER"
+read ZEROTIER
 
 echo -e "\n create and mount partitions \n"
 
@@ -174,14 +186,23 @@ sudo pacman -S pulseaudio --noconfirm --needed
 echo "installing gnome-kering-daemon"
 sudo pacman -S gnome-keyring
 
-echo "installing browsers"
-sudo pacman -S firefox chromium
-
 echo "installing xdotool and xclip"
 sudo pacman -S xdotool xclip
 
+if [[ $FIREFOX == "1" ]]; then
+echo "installing firefox"
+sudo pacman -S firefox
+fi
+
+if [[ $CHROMIUM == "1" ]]; then
+echo "installing chromium"
+sudo pacman -S chromium
+fi
+
+if [[ $VNC == "1" ]]; then
 echo "installing vnc"
 sudo pacman -S tigervnc
+fi
 
 if [[ $DISCORD == "1" ]]; then 
 echo "installing discord"
@@ -204,6 +225,10 @@ fi
 
 if [[ $PICOM == "1" ]]; then 
 sudo pacman -S picom
+fi
+
+if [[ $ZEROTIER == "1" ]]; then 
+sudo pacman -S zerotier-one
 fi
 
 if [[ $DUALBOOT == "1" ]]; then 
