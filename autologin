@@ -1,0 +1,1 @@
+sudo systemctl edit getty@tty1.service --drop-in=autologin.conf
