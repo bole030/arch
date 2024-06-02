@@ -166,7 +166,7 @@ sudo sed -i 's/^#FastConnectable = false/FastConnectable = true/' /etc/bluetooth
 sudo sed -i 's/^# FastConnectable = false/FastConnectable = true/' /etc/bluetooth/main.conf
 
 echo "installing remote stuff (ssh, ufw, rsync, git)"
-sudo pacman -S openssl openssh ufw rsync git --noconfirm --needed
+sudo pacman -S openssl openssh ufw rsync git wol --noconfirm --needed
 sudo systemctl enable sshd
 sudo systemctl start sshd
 sudo ufw default deny incoming
