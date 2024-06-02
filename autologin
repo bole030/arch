@@ -1,1 +1,7 @@
+sudo pacman -S util-linux
 sudo systemctl edit getty@tty1.service --drop-in=autologin.conf
+
+# add this under [Service] and dont forget to change username
+#
+#ExecStart=
+#ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin bole %I $TERM
