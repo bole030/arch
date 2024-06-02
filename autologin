@@ -12,4 +12,3 @@ ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin bole %I $TERM
 then execute them
 
 systemctl daemon-reload
-systemctl start getty@tty1.service
