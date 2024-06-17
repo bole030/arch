@@ -9,3 +9,15 @@ docker run -d --name nextcloud -v /Users/w/nextcloud/:/var/www/html -v /Users/w/
 -v /Users/w/nextcloud/apps:/var/www/html/custom_apps \
 -v theme:/var/www/html/themes/<YOUR_CUSTOM_THEME> \
 
+Here is an example of the code saved as smbclient.sh:
+
+#!bin/sh
+apt update
+apt install smbclient libsmbclient-dev -y
+pecl install smbclient
+docker-php-ext-enable smbclient
+I have this file listed in the same directory as my compose file. In that file I have:
+
+volumes:
+  - ./smbclient.sh:/docker-entrypoint-hooks.d/post-upgrade/smbclient.sh
+Now every time the container updates, either by me or by watchtower smbclient is installed automatically.
