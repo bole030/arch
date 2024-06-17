@@ -1,0 +1,7 @@
+# install vaultgarden
+docker pull vaultwarden/server:latest
+docker run -d --name vaultwarden -v /Users/w/docker/:/data/ --restart unless-stopped -p 80:80 vaultwarden/server:latest
+
+# install nextcloud
+docker pull nextcloud
+docker run -d --name nextcloud -v /Users/w/nextcloud/:/data/ --restart unless-stopped -p 8888:80 nextcloud
