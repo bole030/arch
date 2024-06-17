@@ -4,4 +4,8 @@ docker run -d --name vaultwarden -v /Users/w/docker/:/data/ --restart unless-sto
 
 # install nextcloud
 docker pull nextcloud
-docker run -d --name nextcloud -v /Users/w/nextcloud/:/data/ --restart unless-stopped -p 8888:80 nextcloud
+docker run -d --name nextcloud -v /Users/w/nextcloud/:/var/www/html -v /Users/w/nextcloud/config:/var/www/html/config -v /Users/w/nextcloud/data:/var/www/html/data --restart unless-stopped -p 8888:80 nextcloud
+
+-v /Users/w/nextcloud/apps:/var/www/html/custom_apps \
+-v theme:/var/www/html/themes/<YOUR_CUSTOM_THEME> \
+
