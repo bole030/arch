@@ -3,6 +3,11 @@ docker pull vaultwarden/server:latest
 docker run -d --name vaultwarden -v /Users/w/docker/:/data/ --restart unless-stopped -p 80:80 vaultwarden/server:latest
 
 # install nextcloud
+
+# change trusted domains
+docker exec --user www-data -it nextcloud php occ config:system:get trusted_domains
+docker exec --user www-data -it nextcloud php occ config:system:set trusted_domains 10 --value="192.168.178.33"
+
 docker pull nextcloud
 docker run -d --name nextcloud -v /Users/w/nextcloud/:/var/www/html -v /Users/w/nextcloud/config:/var/www/html/config -v /Users/w/nextcloud/data:/var/www/html/data --restart unless-stopped -p 8888:80 nextcloud
 
