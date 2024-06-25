@@ -2,40 +2,13 @@
 docker pull vaultwarden/server:latest
 docker run -d --name vaultwarden -v /Users/w/docker/:/data/ --restart unless-stopped -p 80:80 vaultwarden/server:latest
 
-# install nextcloud
+# install nextcloud image
+
+docker run --mount type=bind,source="$(pwd)",target=/mnt -p 8888:80 nxtcloud
 
 # change trusted domains
 docker exec --user www-data -it nextcloud php occ config:system:get trusted_domains
 docker exec --user www-data -it nextcloud php occ config:system:set trusted_domains 10 --value="192.168.178.33"
-
-# mount storage
-I've successfully mount /home/<user-name> folder of my host to the /mnt folder of the existing (not running) container. You can do it in the following way:
-
-Open configuration file corresponding to the stopped container, which can be found at /var/lib/docker/containers/99d...1fb/config.v2.json (may be config.json for older versions of docker).
-
-Find MountPoints section, which was empty in my case: "MountPoints":{}. Next replace the contents with something like this (you can copy proper contents from another container with proper settings):
-
-"MountPoints":{"/mnt":{"Source":"/home/<user-name>","Destination":"/mnt","RW":true,"Name":"","Driver":"","Type":"bind","Propagation":"rprivate","Spec":{"Type":"bind","Source":"/home/<user-name>","Target":"/mnt"},"SkipMountpointCreation":false}}
-or the same (formatted):
-
-  "MountPoints": {
-    "/mnt": {
-      "Source": "/home/<user-name>",
-      "Destination": "/mnt",
-      "RW": true,
-      "Name": "",
-      "Driver": "",
-      "Type": "bind",
-      "Propagation": "rprivate",
-      "Spec": {
-        "Type": "bind",
-        "Source": "/home/<user-name>",
-        "Target": "/mnt"
-      },
-      "SkipMountpointCreation": false
-    }
-  }
-Restart the docker service: service docker restart
 
 docker pull nextcloud
 docker run -d --name nextcloud -v /Users/w/nextcloud/:/var/www/html -v /Users/w/nextcloud/config:/var/www/html/config -v /Users/w/nextcloud/data:/var/www/html/data --restart unless-stopped -p 8888:80 nextcloud
